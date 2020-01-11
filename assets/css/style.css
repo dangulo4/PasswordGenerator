@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cabin Condensed', sans-serif;
+    background-color: transparent;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#generate {
+    float: left;
+}
+
+#copy {
+    float: right;
+}

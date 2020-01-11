@@ -7,26 +7,61 @@
     <title>Password Generator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="..\assets\css\style.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed&display=swap" rel="stylesheet">
+ 
   </head>
   <body>
     <!--This is the jumbotron-->
-    <div class="jumbotron">
-      <header>
-        <h1 class="display-4">Password Generator</h1>
-      </header>
-      <hr class="my-4">
-      <h2>Generate a Password</h2>
+    <div class="jumbotron bg-secondary text-white"> 
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <header>
+                <h1 class="display-4">Password Generator</h1>
+              </header>
+            </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Generate a Password</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <a id="copy" class="btn btn-primary btn-lg" href="#" role="button">Copy to Clipboard</a>
+            <a id="generate" class="btn btn-primary btn-lg" href="#" role="button">Generate Password</a>
+          </div>
+        </div>
+      </div>
+      
     <!--This is where the password will display-->  
-    <textarea
-        readonly
-        id="password"
-        placeholder="Your Secure Password"
-        aria-label="Generated Password"
-    ></textarea>
+    
     <!--Two buttons-->
-    <a id="generate" class="btn btn-primary btn-lg" href="#" role="button">Generate Password</a>
-    <a id="copy" class="btn btn-primary btn-lg" href="#" role="button">Copy to Clipboard</a>
+   
     </div>
     
   </body>
