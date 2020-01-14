@@ -8,6 +8,8 @@ var hasLowerEl = '';
 var hasUpperEl = '';
 var hasNumberEl = '';
 var hasSpecialCharEl = '';
+var getGeneratedPasswordEl = '';
+var passwordEl = '';
 
 // prompt user for: lowercase
 function getLower(hasLower) {
@@ -73,6 +75,24 @@ function getSpecialChar(hasSpecialChar) {
     console.log('The user answered ' + hasSpecialCharEl + ' to include a special character in the password.');
 }
 
+//create object function for the user password choices
+function getGeneratedPasswordObj(hasLower, hasUpper, hasNumber, hasSpecialChar) {
+    var hasLower = hasLowerEl
+    var hasUpper = hasUpperEl
+    var hasNumber = hasNumberEl
+    var hasSpecialChar = hasSpecialCharEl
+    var passwordEl = {
+        lower: hasLowerEl,
+        upper: hasUpperEl,
+        number: hasNumberEl,
+        specialChar: hasSpecialCharEl
+    }
+    //pass to global variable
+    getGeneratedPasswordEl = passwordEl;
+    // used for debugging and to check gloabl scope
+    console.log(getGeneratedPasswordEl);
+}
+
 //Event listener when user clicks generate button
 generateEl.addEventListener('click', function (event) {
     //event.preventDefault();
@@ -103,12 +123,9 @@ generateEl.addEventListener('click', function (event) {
         getUpper();
         getNumber();
         getSpecialChar();
+        getGeneratedPasswordObj();
+        
 });
-
-//create object function for the user password choices
-
-// get the results from 
-
 
 //Password generator functions - http://www.net-comber.com/charset.html
 
