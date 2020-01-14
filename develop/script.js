@@ -1,28 +1,82 @@
-// var submitEl = document.querySelector("#submit");
-// var nameInput = document.querySelector("#name");
-// var emailInput = document.querySelector("#email");
-// var submissionResponseEl = document.querySelector("#response");
+// declare variables to access the DOM
+var textAreaEl = document.getElementById('exampleFormControlTextarea1');
+var generateEl  = document.getElementById('generate');
 
-// submitEl.addEventListener("click", function(event) {
-//   event.preventDefault();
+//declare global variables
+var pwlengthEl = '';
+var hasLowerEl = '';
+var hasUpperEl = '';
+var hasNumberEl = '';
+var hasSpecialCharEl = '';
 
-//   console.log(event);
+// prompt user for: lowercase
+function getLower(hasLower) {
+    var hasLower = confirm('Would you like to include a lower letter in your password?');
+    if (hasLower === true) {
+        // call function to generate random lower case
+        pickRandomLower();
+        console.log(pickRandomLower());
+    } else {
+        haslower = false;
+    }
+    // set the global variable to equal the local variable
+    this.hasLowerEl = hasLower;
+    console.log(hasLower);
+    // used for debugging and to check global scope
+    console.log('The user answered ' + hasLowerEl + ' to include a lower case in the password.');
+}
+//prompt user for: uppercase
+function getUpper(hasUpper) {
+    var hasUpper = confirm('Would you like to include an upper letter in your password?');
+    if (hasUpper === true) {
+        //call the function to generate random upper case
+        pickRandomUpper();
+        console.log(pickRandomUpper());
+    } else {
+        this.hasUpper = false;
+    }
+    // set the global variable to equal the local variable
+    hasUpperEl = hasUpper;
+    console.log(hasUpper);
+    // used for debugging and to check global scope
+    console.log('The user answered ' + hasUpperEl + ' to inlcude an upper case in the password.');
+}
+//prompt user for: number
+function getNumber(hasNumber) {
+    var hasNumber = confirm('Would you like to include a number in your password?');
+    if (hasNumber === true) {
+        // call function to generate random number
+        pickRandomNumber();
+        console.log(pickRandomNumber());
+    } else {
+        this.hasNumber = false;
+    }
+    // set the global variable to equal the local variable
+    hasNumberEl = hasNumber;
+    console.log(hasNumber);
+    console.log('The user answered ' + hasNumberEl + ' to include a number in the password.');
+}
 
-//   var response = "Thank you for your submission " + nameInput.value + "! We will reach out to you at " + emailInput.value + ".";
-//   submissionResponseEl.textContent = response;
-// });
+//prompt user for: special characters
+function getSpecialChar(hasSpecialChar) {
+    var hasSpecialChar = confirm('Would you like to include a special charater in your password?');
+    if (hasSpecialChar === true) {
+        // call function to generate random special character
+        pickSpecialChar();
+        console.log(pickSpecialChar());
+    } else {
+        this.hasSpecialChar = false;
+    }
+    // set the global variable to equal the local variable
+    hasSpecialCharEl = hasSpecialChar;
+    console.log(hasSpecialChar);
+    console.log('The user answered ' + hasSpecialCharEl + ' to include a special character in the password.');
+}
 
-
-//elements
-// var lengthEl = ;
-// var exampleFormControlTextarea1El = documents.getElementsById('exampleFormControlTextarea1El');
-var generateEl = document.querySelector('#generate');
-
-
-
-//prompt user for criteria
+//Event listener when user clicks generate button
 generateEl.addEventListener('click', function (event) {
-    event.preventDefault();
+    //event.preventDefault();
+    //prompt user for: password length
     var pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'), 10);
     var pwlength = pwlengthEl;
         // check if the length is withing boundary requirements
@@ -40,23 +94,20 @@ generateEl.addEventListener('click', function (event) {
                 return true;
             }
         }
-    checklength();
-    console.log(pwlength);
-    console.log(typeof pwlength);
-    console.log(pickRandomLower());
-    console.log(pickRandomUpper());
-    console.log(pickRandomNumber());
-    console.log(pickSpecialChar());
+        // used for debugging and to check global scope
+        console.log(pwlengthEl);
+        console.log(typeof pwlengthEl);
+        //call functions to prompt user for lowercase, uppercase, number, and special characters
+        checklength();
+        getLower();
+        getUpper();
+        getNumber();
+        getSpecialChar();
 });
 
+//create object function for the user password choices
 
-//create object function
-var pickFunction = {
-    lower: pickRandomLower,
-    upper: pickRandomUpper,
-    number: pickRandomNumber,
-    specialCharacter: pickSpecialChar
-};
+// get the results from 
 
 
 //Password generator functions - http://www.net-comber.com/charset.html
@@ -80,10 +131,4 @@ function pickSpecialChar() {
     //generate random special characters array
     var specialChar = ['!', '#', '$', '%', '&', '(', ')', '*', '@', '~', '<', '>', '^', '?'];
     return specialChar[Math.floor(Math.random() * specialChar.length)];
-
-
 }
-
-//picklength();
-
-//console.log(pickSpecialChar());
