@@ -1,26 +1,14 @@
 // declare variables to access the DOM
 var textAreaEl = document.getElementById('exampleFormControlTextarea1');
-var generateEl  = document.getElementById('generate');
+var generateEl = document.getElementById('generate');
 
 //declare global variables
-var passwordStringEl = '';
-// var pwlengthEl = '';
-var length = '';
-var hasLowerEl = '';
-var lower = '';
-var hasUpperEl = '';
-var upper = '';
-var hasNumberEl = '';
-var number = '';
-var hasSpecialCharEl = '';
+var lower       = '';
+var upper       = '';
+var number      = '';
 var specialChar = '';
-var getGeneratedPasswordEl = '';
-var passwordEl = '';
-var passwordArr = '';
-var textarea = '';
-var pwlengthEl = 0;
-var charset = '';
-
+var pwlengthEl  = 0;
+var charset     = '';
 
 // prompt user for: lowercase
 function getLower() {
@@ -96,24 +84,19 @@ function getSpecialChar() {
 }
 
 //create object function for the user password choices
-function getGeneratedPasswordObj() {
+function getGeneratedPassword() {
     var hasLower = lower
     var hasUpper = upper
     var hasNumber = number
     var hasSpecialChar = specialChar
     //var pwlengthEl = pwlength
-    var passwordEl = {
-        lower: lower,
-        upper: upper,
-        number: number,
-        specialChar: specialChar
-    }
-    //pass to global variables to getGeneratePasswordEl
-    getGeneratedPasswordEl = passwordEl;
-    // used for debugging and to check gloabl scope
-    console.log(getGeneratedPasswordEl);
-
-    // create password array where only has equal true ****ASK QUESTION
+    // var passwordEl = {
+    //     lower: lower,
+    //     upper: upper,
+    //     number: number,
+    //     specialChar: specialChar
+    // }
+    // create array based on user choice 
     var typeArr = [];
     if (hasLower != '') {
         typeArr.push(lower);
@@ -129,42 +112,42 @@ function getGeneratedPasswordObj() {
     }
   
     //loop through array based on the length
+    for(var i = 0; i < pwlengthEl; ++i){
+        charset += typeArr;
 
-    for(var i = 0; i < pwlengthEl; i++){
-        console.log(typeof pwlengthEl)
-        charset += typeArr[i];
-        //convert passwordArr to string;
-        //var charset = typeArr.join('');
-
-        //var finalPassword = charset;
-         charset += Math.floor(Math.random() * pwlengthEl);
     }
-    
+
+    // for(let i=0; i<length; i+=typesCount) {
+	// 	typesArr.forEach(type => {
+	// 		const funcName = Object.keys(type)[0];
+	// 		generatedPassword += randomFunc[funcName]();
+	// 	});
+	// }
+
     textAreaEl.textContent = charset;
     console.log(charset);
-    //console.log(finalPassword);
+    console.log(typeof pwlengthEl)
+    console.log(pwlengthEl);
 }
 
 //Event listener when user clicks generate button
 generateEl.addEventListener('click', function (event) {
     //event.preventDefault();
     //prompt user for: password length
-    // var pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'), 10);
     pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
-    //var pwlength = pwlengthEl;
-        // check if the length is withing boundary requirements
-        function checklength(pwlength, minlength, maxlength) {
-            var pwlength = pwlengthEl;
+         // check if the length is withing boundary requirements
+        function checklength() {
+            //var pwlength = pwlengthEl;
             var minlength = 8;
             var maxlength = 128;
             var minlen = minlength;
             var maxlen = maxlength;
-            if (pwlength < minlen || length > maxlen) {
+            if (pwlengthEl < minlen || pwlengthEl > maxlen) {
                 alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
                 return;
             } else {
-                alert('You have entered a valid number of ' + pwlength);
-                //return;
+                alert('You have entered a valid number of ' + pwlengthEl);
+                return;
             }
         }
         // used for debugging and to check global scope
@@ -176,7 +159,7 @@ generateEl.addEventListener('click', function (event) {
         getUpper();
         getNumber();
         getSpecialChar();
-        getGeneratedPasswordObj();
+        getGeneratedPassword();
 });
 
 //Password generator functions - http://www.net-comber.com/charset.html
@@ -200,3 +183,4 @@ function pickSpecialChar() {
     var specialChar = ['!', '#', '$', '%', '&', '(', ')', '*', '@', '~', '<', '>', '^', '?'];
     return specialChar[Math.floor(Math.random() * specialChar.length)];
 }
+
