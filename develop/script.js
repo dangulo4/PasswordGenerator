@@ -4,7 +4,7 @@ var generateEl  = document.getElementById('generate');
 
 //declare global variables
 var passwordStringEl = '';
-var pwlengthEl = '';
+// var pwlengthEl = '';
 var length = '';
 var hasLowerEl = '';
 var lower = '';
@@ -17,9 +17,13 @@ var specialChar = '';
 var getGeneratedPasswordEl = '';
 var passwordEl = '';
 var passwordArr = '';
+var textarea = '';
+var pwlengthEl = 0;
+var charset = '';
+
 
 // prompt user for: lowercase
-function getLower(hasLower) {
+function getLower() {
     var hasLower = confirm('Would you like to include a lower letter in your password?');
     if (hasLower === true) {
         // call function to generate random lower case
@@ -38,7 +42,7 @@ function getLower(hasLower) {
     console.log('The user answered ' + hasLowerEl + ' to include a lower case in the password.');
 }
 //prompt user for: uppercase
-function getUpper(hasUpper) {
+function getUpper() {
     var hasUpper = confirm('Would you like to include an upper letter in your password?');
     if (hasUpper === true) {
         //call the function to generate random upper case
@@ -56,7 +60,7 @@ function getUpper(hasUpper) {
     console.log('The user answered ' + hasUpperEl + ' to inlcude an upper case in the password.');
 }
 //prompt user for: number
-function getNumber(hasNumber) {
+function getNumber() {
     var hasNumber = confirm('Would you like to include a number in your password?');
     if (hasNumber === true) {
         // call function to generate random number
@@ -74,7 +78,7 @@ function getNumber(hasNumber) {
 }
 
 //prompt user for: special characters
-function getSpecialChar(hasSpecialChar) {
+function getSpecialChar() {
     var hasSpecialChar = confirm('Would you like to include a special charater in your password?');
     if (hasSpecialChar === true) {
         // call function to generate random special character
@@ -92,11 +96,12 @@ function getSpecialChar(hasSpecialChar) {
 }
 
 //create object function for the user password choices
-function getGeneratedPasswordObj(textAreagEl, hasLower, hasUpper, hasNumber, hasSpecialChar) {
+function getGeneratedPasswordObj() {
     var hasLower = lower
     var hasUpper = upper
     var hasNumber = number
     var hasSpecialChar = specialChar
+    //var pwlengthEl = pwlength
     var passwordEl = {
         lower: lower,
         upper: upper,
@@ -111,41 +116,41 @@ function getGeneratedPasswordObj(textAreagEl, hasLower, hasUpper, hasNumber, has
     // create password array where only has equal true ****ASK QUESTION
     var typeArr = [];
     if (hasLower != '') {
-        typeArr.push({lower});
+        typeArr.push(lower);
     } 
     if (hasUpper != ''){
-        typeArr.push({upper});
+        typeArr.push(upper);
     } 
     if (hasNumber != ''){
-        typeArr.push({number});
+        typeArr.push(number);
     } 
     if (hasSpecialChar != ''){
-        typeArr.push({specialChar});
+        typeArr.push(specialChar);
+    }
+  
+    //loop through array based on the length
+
+    for(var i = 0; i < pwlengthEl; i++){
+        console.log(typeof pwlengthEl)
+        charset += typeArr[i];
+        //convert passwordArr to string;
+        //var charset = typeArr.join('');
+
+        //var finalPassword = charset;
+         charset += Math.floor(Math.random() * pwlengthEl);
     }
     
-    passwordArr = typeArr;
-    //used for debugging
-    console.log(passwordArr);
-
-    // //convert passwordArr to string;
-   var str = Object.values(passwordArr);
-   
-    //used for debugging
-    //console.log(passwordStringEl);
-    textAreaEl.innerText = 'Hello ' + str;
-    
-    
-    //loop through array to parse out
-    // for (var i = 0; i < passwordArr.length; i++) {
-    //    
-    // }
+    textAreaEl.textContent = charset;
+    console.log(charset);
+    //console.log(finalPassword);
 }
 
 //Event listener when user clicks generate button
 generateEl.addEventListener('click', function (event) {
     //event.preventDefault();
     //prompt user for: password length
-    var pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'), 10);
+    // var pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'), 10);
+    pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
     //var pwlength = pwlengthEl;
         // check if the length is withing boundary requirements
         function checklength(pwlength, minlength, maxlength) {
@@ -156,10 +161,10 @@ generateEl.addEventListener('click', function (event) {
             var maxlen = maxlength;
             if (pwlength < minlen || length > maxlen) {
                 alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
-                return false;
+                return;
             } else {
                 alert('You have entered a valid number of ' + pwlength);
-                return true;
+                //return;
             }
         }
         // used for debugging and to check global scope
@@ -172,7 +177,6 @@ generateEl.addEventListener('click', function (event) {
         getNumber();
         getSpecialChar();
         getGeneratedPasswordObj();
-        
 });
 
 //Password generator functions - http://www.net-comber.com/charset.html
