@@ -3,13 +3,20 @@ var textAreaEl = document.getElementById('exampleFormControlTextarea1');
 var generateEl  = document.getElementById('generate');
 
 //declare global variables
+var passwordStringEl = '';
 var pwlengthEl = '';
+var length = '';
 var hasLowerEl = '';
+var lower = '';
 var hasUpperEl = '';
+var upper = '';
 var hasNumberEl = '';
+var number = '';
 var hasSpecialCharEl = '';
+var specialChar = '';
 var getGeneratedPasswordEl = '';
 var passwordEl = '';
+var passwordArr = '';
 
 // prompt user for: lowercase
 function getLower(hasLower) {
@@ -17,12 +24,15 @@ function getLower(hasLower) {
     if (hasLower === true) {
         // call function to generate random lower case
         pickRandomLower();
-        console.log(pickRandomLower());
+        //console.log(pickRandomLower());
+        lower = pickRandomLower();
+        console.log(lower);
     } else {
         haslower = false;
     }
     // set the global variable to equal the local variable
-    this.hasLowerEl = hasLower;
+    hasLowerEl = hasLower;
+    
     console.log(hasLower);
     // used for debugging and to check global scope
     console.log('The user answered ' + hasLowerEl + ' to include a lower case in the password.');
@@ -33,9 +43,11 @@ function getUpper(hasUpper) {
     if (hasUpper === true) {
         //call the function to generate random upper case
         pickRandomUpper();
-        console.log(pickRandomUpper());
+        //console.log(pickRandomUpper());
+        upper = pickRandomUpper();
+        console.log(upper);
     } else {
-        this.hasUpper = false;
+        hasUpper = false;
     }
     // set the global variable to equal the local variable
     hasUpperEl = hasUpper;
@@ -49,9 +61,11 @@ function getNumber(hasNumber) {
     if (hasNumber === true) {
         // call function to generate random number
         pickRandomNumber();
-        console.log(pickRandomNumber());
+        //console.log(pickRandomNumber());
+        number = pickRandomNumber();
+        console.log(number);
     } else {
-        this.hasNumber = false;
+        hasNumber = false;
     }
     // set the global variable to equal the local variable
     hasNumberEl = hasNumber;
@@ -65,9 +79,11 @@ function getSpecialChar(hasSpecialChar) {
     if (hasSpecialChar === true) {
         // call function to generate random special character
         pickSpecialChar();
-        console.log(pickSpecialChar());
+        //console.log(pickSpecialChar());
+        specialChar = pickSpecialChar();
+        console.log(specialChar);
     } else {
-        this.hasSpecialChar = false;
+        hasSpecialChar = false;
     }
     // set the global variable to equal the local variable
     hasSpecialCharEl = hasSpecialChar;
@@ -76,21 +92,53 @@ function getSpecialChar(hasSpecialChar) {
 }
 
 //create object function for the user password choices
-function getGeneratedPasswordObj(hasLower, hasUpper, hasNumber, hasSpecialChar) {
-    var hasLower = hasLowerEl
-    var hasUpper = hasUpperEl
-    var hasNumber = hasNumberEl
-    var hasSpecialChar = hasSpecialCharEl
+function getGeneratedPasswordObj(textAreagEl, hasLower, hasUpper, hasNumber, hasSpecialChar) {
+    var hasLower = lower
+    var hasUpper = upper
+    var hasNumber = number
+    var hasSpecialChar = specialChar
     var passwordEl = {
-        lower: hasLowerEl,
-        upper: hasUpperEl,
-        number: hasNumberEl,
-        specialChar: hasSpecialCharEl
+        lower: lower,
+        upper: upper,
+        number: number,
+        specialChar: specialChar
     }
-    //pass to global variable
+    //pass to global variables to getGeneratePasswordEl
     getGeneratedPasswordEl = passwordEl;
     // used for debugging and to check gloabl scope
     console.log(getGeneratedPasswordEl);
+
+    // create password array where only has equal true ****ASK QUESTION
+    var typeArr = [];
+    if (hasLower != '') {
+        typeArr.push({lower});
+    } 
+    if (hasUpper != ''){
+        typeArr.push({upper});
+    } 
+    if (hasNumber != ''){
+        typeArr.push({number});
+    } 
+    if (hasSpecialChar != ''){
+        typeArr.push({specialChar});
+    }
+    
+    passwordArr = typeArr;
+    //used for debugging
+    console.log(passwordArr);
+
+    // //convert passwordArr to string;
+   var str = Object.values(passwordArr);
+   
+    //used for debugging
+    //console.log(passwordStringEl);
+    textAreaEl.innerText = 'Hello ' + str;
+    
+    
+    //loop through array to parse out
+    // for (var i = 0; i < passwordArr.length; i++) {
+    //    
+    // }
 }
 
 //Event listener when user clicks generate button
@@ -98,7 +146,7 @@ generateEl.addEventListener('click', function (event) {
     //event.preventDefault();
     //prompt user for: password length
     var pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'), 10);
-    var pwlength = pwlengthEl;
+    //var pwlength = pwlengthEl;
         // check if the length is withing boundary requirements
         function checklength(pwlength, minlength, maxlength) {
             var pwlength = pwlengthEl;
@@ -128,7 +176,6 @@ generateEl.addEventListener('click', function (event) {
 });
 
 //Password generator functions - http://www.net-comber.com/charset.html
-
 function pickRandomLower() {
     //generate a random lowercase letter using CharCode starting at 97 thru 122
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
