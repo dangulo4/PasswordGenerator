@@ -98,7 +98,7 @@ function getGeneratedPassword() {
     }
     //loop through array based on the length
     for (var i = 0; i < pwlengthEl; ++i) {
-        var typeArr = [i];
+        var typeArr = [];
 
         if (hasLower != '') {
             typeArr.push(pickRandomLower());
@@ -116,14 +116,15 @@ function getGeneratedPassword() {
         charset = charset.substring(0, pwlengthEl);
     }
     textAreaEl.textContent = charset;
+     //used for debugging
+     console.log(charset);
+     console.log(typeof pwlengthEl)
+     console.log(pwlengthEl);
+     console.log(passwordEl);
     //clear array
+    var passwordEl = '';
+    var typeArr = [];
     charset = '';
-    //used for debugging
-    console.log(charset);
-    console.log(typeof pwlengthEl)
-    console.log(pwlengthEl);
-    console.log(passwordEl);
-
 }
 
 //Event listener when user clicks generate button
