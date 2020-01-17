@@ -3,21 +3,21 @@ var textAreaEl = document.getElementById('exampleFormControlTextarea1');
 var generateEl = document.getElementById('generate');
 
 //declare global variables
-//var pwlengthEl  = '';
-var lower = '';
-var upper = '';
-var number = '';
-var specialChar = '';
-var pwlengthEl = 0;
+// var lower = '';
+// var upper = '';
+// var number = '';
+// var specialChar = '';
+// var pwlengthEl = 0;
 var charset = '';
-//var textAreaEl  = '';
+
 
 // prompt user for: lowercase
 function getLower() {
-    var hasLower = confirm('Would you like to include a lower letter in your password?');
+    var hasLower;
+    hasLower = confirm('Would you like to include a lower letter in your password?');
     if (hasLower === true) {
         // call function to generate random lower case
-        pickRandomLower();
+        //pickRandomLower();
         //console.log(pickRandomLower());
         lower = pickRandomLower();
         console.log(lower);
@@ -35,7 +35,7 @@ function getUpper() {
     var hasUpper = confirm('Would you like to include an upper letter in your password?');
     if (hasUpper === true) {
         //call the function to generate random upper case
-        pickRandomUpper();
+        //pickRandomUpper();
         //console.log(pickRandomUpper());
         upper = pickRandomUpper();
         console.log(upper);
@@ -53,7 +53,7 @@ function getNumber() {
     var hasNumber = confirm('Would you like to include a number in your password?');
     if (hasNumber === true) {
         // call function to generate random number
-        pickRandomNumber();
+        //pickRandomNumber();
         //console.log(pickRandomNumber());
         number = pickRandomNumber();
         console.log(number);
@@ -71,7 +71,7 @@ function getSpecialChar() {
     var hasSpecialChar = confirm('Would you like to include a special charater in your password?');
     if (hasSpecialChar === true) {
         // call function to generate random special character
-        pickSpecialChar();
+        //pickSpecialChar();
         //console.log(pickSpecialChar());
         specialChar = pickSpecialChar();
         console.log(specialChar);
@@ -114,51 +114,51 @@ function getGeneratedPassword() {
         }
         charset += typeArr.join('');
         charset = charset.substring(0, pwlengthEl);
+
     }
     textAreaEl.textContent = charset;
-     //used for debugging
-     console.log(charset);
-     console.log(typeof pwlengthEl)
-     console.log(pwlengthEl);
-     console.log(passwordEl);
-    //clear array
-    var passwordEl = '';
-    var typeArr = [];
-    charset = '';
+    //used for debugging
+    console.log(charset);
+    console.log(passwordEl);
+
+    // Clear out the variables to regenerate a new password
+    clearVar();
 }
 
+
 //Event listener when user clicks generate button
-generateEl.addEventListener('click', function (event) {
+generateEl.addEventListener('click', function () {
     //prompt user for: password length
     pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
+ 
     // check if the length is withing boundary requirements
     function checklength() {
-
-        //var pwlength = pwlengthEl;
-        var minlength = 8;
-        var maxlength = 128;
-        var minlen = minlength;
-        var maxlen = maxlength;
-        if (pwlengthEl < minlen || pwlengthEl > maxlen) {
-            alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
-            return '';
-        } else {
-            alert('You have entered a valid number of ' + pwlengthEl);
-            return;
-        }
-    }
-    // used for debugging and to check global scope
-    console.log(pwlengthEl);
-    console.log(typeof pwlengthEl);
-    //call functions to prompt user for lowercase, uppercase, number, and special characters
-    checklength();
-    getLower();
-    getUpper();
-    getNumber();
-    getSpecialChar();
-    getGeneratedPassword();
+      //var pwlength = pwlengthEl;
+      var minlength = 8;
+      var maxlength = 128;
+      var minlen = minlength;
+      var maxlen = maxlength;
+      if (pwlengthEl < minlen || pwlengthEl > maxlen) {
+          alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
+          pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
+          checklength();
+          return '';
+      } else {
+          alert('You have entered a valid number of ' + pwlengthEl);
+          return '';
+      }
+  }
+  // used for debugging and to check global scope
+  console.log(pwlengthEl);
+  console.log(typeof pwlengthEl);
+  //call functions to prompt user for lowercase, uppercase, number, and special characters
+  checklength();
+  getLower();
+  getUpper();
+  getNumber();
+  getSpecialChar();
+  getGeneratedPassword();
 });
-
 //Password generator functions - http://www.net-comber.com/charset.html
 function pickRandomLower() {
     //generate a random lowercase letter using CharCode starting at 97 thru 122
@@ -179,4 +179,17 @@ function pickSpecialChar() {
     //generate random special characters array
     var specialChar = ['!', '#', '$', '%', '&', '(', ')', '*', '@', '~', '<', '>', '^', '?'];
     return specialChar[Math.floor(Math.random() * specialChar.length)];
+}
+
+function clearVar() {
+    lower = '';
+    upper = '';
+    number = ''
+    specialChar = '';
+    charset = '';
+    hasLower = '';
+    hasUpper = '';
+    hasNumber = '';
+    specialChar = '';
+    //textAreaEl.value  = '';
 }
