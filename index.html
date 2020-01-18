@@ -13,12 +13,12 @@
   </head>
   <body>
     <!--This is the jumbotron-->
-    <div class="jumbotron bg-secondary text-white"> 
+    <div class="jumbotron bg-secondary text-white" style="background-image: url(https://cdn.pixabay.com/photo/2013/09/21/11/48/keys-184460__340.jpg); background-size: 100%;"> 
       <div class="container">
         <div class="row">
             <div class="col-md-12">
               <header>
-                <h1 class="display-4">Password Generator</h1>
+                <h1 class="display-4">Create strong password with a Password Generator</h1>
               </header>
             </div>
         </div>
@@ -42,7 +42,7 @@
           <div class="col-md-12">
             <form>
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <label for="exampleFormControlTextarea1"></label>
                 <textarea readonly class="form-control" id="exampleFormControlTextarea1"  rows="3" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
               </div>
             </form>
@@ -52,15 +52,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <button id="generate"  class="btn btn-primary btn-lg" href="#" role="button">Generate Password</button>
-            <a id="copy" class="btn btn-primary btn-lg" href="#" role="button">Copy to Clipboard</a>
+            <button id="generate"  class="btn btn-secondary btn-lg" href="#" role="button">Generate Password</button>
+            <button id="copy" class="btn btn-secondary btn-lg" href="#" role="button">Copy to Clipboard</button>
           </div>
         </div>
       </div>
-      
-    <!--This is where the password will display-->  
-    
-    <!--Two buttons-->
    
     </div>
     <script src="script.js"></script>

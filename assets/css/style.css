@@ -3,16 +3,30 @@
 }
 
 body {
+    
     font-family: 'Cabin Condensed', sans-serif;
+    
+    background-image: url(https://cdn.pixabay.com/photo/2013/09/21/11/48/keys-184460__340.jpg); 
+    background-size: 100%;;
     background-color: transparent;
 }
 
+
+
 h1 {
     text-align: center;
-}
+    font-weight:bolder ;
+    font-size: 100px;
+    color: #2e2a2a;
+    text-shadow: 2px 0px 2px #CCCCCC, 
+ }
 
 h2 {
     text-align: center;
+    font-weight: bolder;
+    font-size: 45px;
+    color: #381919;
+    text-shadow: 2px 0px 2px #CCCCCC, 
 }
 
 #generate {

@@ -1,10 +1,11 @@
 // declare variables to access the DOM
-var textAreaEl = document.getElementById('exampleFormControlTextarea1');
-var generateEl = document.getElementById('generate');
-var charset = '';
-var lower   = '';
-var upper   = '';
-var number  = '';
+var textAreaEl  = document.getElementById('exampleFormControlTextarea1');
+var generateEl  = document.getElementById('generate');
+var copyEl      = document.getElementById('copy');
+var charset     = '';
+var lower       = '';
+var upper       = '';
+var number      = '';
 var specialChar = '';
 
 // prompt user for: lowercase
@@ -115,35 +116,37 @@ function getGeneratedPassword() {
 generateEl.addEventListener('click', function () {
     //prompt user for: password length
     pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
- 
+
     // check if the length is withing boundary requirements
     function checklength() {
-      //var pwlength = pwlengthEl;
-      var minlength = 8;
-      var maxlength = 128;
-      var minlen = minlength;
-      var maxlen = maxlength;
-      if (pwlengthEl < minlen || pwlengthEl > maxlen) {
-          alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
-          pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
-          checklength();
-          return '';
-      } else {
-          alert('You have entered a valid number of ' + pwlengthEl);
-          return '';
-      }
-  }
-  // used for debugging and to check global scope
-  console.log(pwlengthEl);
-  console.log(typeof pwlengthEl);
-  //call functions to prompt user for lowercase, uppercase, number, and special characters
-  checklength();
-  getLower();
-  getUpper();
-  getNumber();
-  getSpecialChar();
-  getGeneratedPassword();
+        //var pwlength = pwlengthEl;
+        var minlength = 8;
+        var maxlength = 128;
+        var minlen = minlength;
+        var maxlen = maxlength;
+        if (pwlengthEl < minlen || pwlengthEl > maxlen) {
+            alert('Please select a number between ' + minlength + ' and ' + maxlength + ' characters');
+            pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
+            checklength();
+            return '';
+        } else {
+            alert('You have entered a valid number of ' + pwlengthEl);
+            return '';
+        }
+    }
+
+    // used for debugging and to check global scope
+    console.log(pwlengthEl);
+    console.log(typeof pwlengthEl);
+    //call functions to prompt user for lowercase, uppercase, number, and special characters
+    checklength();
+    getLower();
+    getUpper();
+    getNumber();
+    getSpecialChar();
+    getGeneratedPassword();
 });
+
 
 //Password generator functions - http://www.net-comber.com/charset.html
 function pickRandomLower() {
@@ -179,6 +182,29 @@ function clearVar() {
     specialChar = '';
 }
 
-// function newPswd() {
-//     var newPswd = confirm('Would you like to generate a new passsword?');
-// }
+//The following code has been borrowed from traversy media in youtube.
+//The function will copy the password from the text content.
+copyEl.addEventListener('click', () => {
+    var textarea = document.createElement('textarea');
+    var password = textAreaEl.textContent;
+
+    if (!password) {
+        return;
+    }
+
+    textarea.value = password;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+    alert('Password copied to clipboard');
+
+    textAreaEl.textContent = '';
+    response = alert('Click Generate to get another password');
+    if (response === true) {
+        pwlengthEl = parseInt(prompt('Please enter a value from 8 to 128 characters'));
+        checklength();
+    } else {
+        return;
+    }
+});
